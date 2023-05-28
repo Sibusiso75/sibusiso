@@ -1,0 +1,14 @@
+body {
+  background: rgb(0, 0, 40);
+}
+button {
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+  background-color: orange;
+  border: none;
+}
+h1 {
+  font-weight: bold;
+  color: white;
+}
