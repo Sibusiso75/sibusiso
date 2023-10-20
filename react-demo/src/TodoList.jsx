@@ -25,7 +25,6 @@ const App = () => {
   const [removeAlert, setRemoveAlert] = useState(false);
   const [addAlert, setAddAlert] = useState(false);
   const [alert, setAlert] = useState(false);
-  const [alertID, setAlertID] = useState(null);
   const [editing, setEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [input, setInput] = useState(false);
@@ -38,11 +37,7 @@ const App = () => {
       setRemoveAlert(false);
     }, 1000);
   };
-  const alertBox = (id) => {
-    setAlert(!alert);
-    setEditing(false);
-    setAlertID(id);
-  };
+
   const handleCheck = (id) => {
     const completed = items.map((task) => {
       if (task.id === id) {
@@ -217,7 +212,7 @@ const App = () => {
                     <FaEdit onClick={() => edit(item.id)} className="edit" />
 
                     <FaTrash
-                      onClick={() => alertBox(item.id)}
+                      onClick={() => remove(item.id)}
                       className="faTrash"
                     />
                     <hr />
@@ -226,11 +221,11 @@ const App = () => {
               ) : (
                 ""
               )}
-              {alert && alertID === item.id && (
+              {alert && (
                 <div className="alert">
                   <p className="question">
-                    Are you sure you want to remove '{item.name}'?
-                    <button onClick={() => remove(item.id)} className="yes">
+                    Are you sure you want to remove all tasks?
+                    <button onClick={() => setItems([])} className="yes">
                       Yes
                     </button>
                     <button onClick={() => setAlert(!alert)} className="no">
@@ -246,7 +241,7 @@ const App = () => {
         <br />
         {items.length > 1 && (
           <button
-            onClick={() => setItems([])}
+            onClick={() => setAlert(!alert)}
             style={{ background: "orange", color: "blue" }}
           >
             clear all
